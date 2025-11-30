@@ -1,0 +1,59 @@
+[project]
+name = "ComfyUi"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+	"pip>=25.3,<26",
+]
+
+[project.optional-dependencies]
+torch291_cu130 = [
+	"torch==2.9.1+cu130",
+	"torchvision==0.24.1+cu130",
+	"torchaudio==2.9.1+cu130",
+	"triton-windows==3.5.1.post21", # https://github.com/woct0rdho/triton-windows/releases
+	"sageattention==2.2.0+cu130torch2.9.0andhigher.post4", # https://github.com/woct0rdho/SageAttention/releases
+]
+torch271_cu128 = [
+	"torch==2.7.1+cu128",
+	"torchvision==0.22.1+cu128",
+	"torchaudio==2.7.1+cu128",
+	"triton-windows==3.3.1.post21", # https://github.com/woct0rdho/triton-windows/releases
+	"sageattention==2.2.0+cu128torch2.7.1.post3", # https://github.com/woct0rdho/SageAttention/releases
+]
+
+[tool.uv]
+conflicts = [
+	[
+		{ extra = "torch291_cu130" },
+		{ extra = "torch271_cu128" },
+	],
+]
+
+[[tool.uv.index]]
+name = "cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[[tool.uv.index]]
+name = "cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = [
+	{ index = "cu130", extra = "torch291_cu130" },
+	{ index = "cu128", extra = "torch271_cu128" },
+]
+torchvision = [
+	{ index = "cu130", extra = "torch291_cu130" },
+	{ index = "cu128", extra = "torch271_cu128" },
+]
+torchaudio = [
+	{ index = "cu130", extra = "torch291_cu130" },
+	{ index = "cu128", extra = "torch271_cu128" },
+]
+sageattention = [
+	{ url = "https://github.com/woct0rdho/SageAttention/releases/download/v2.2.0-windows.post4/sageattention-2.2.0+cu130torch2.9.0andhigher.post4-cp39-abi3-win_amd64.whl", extra = "torch291_cu130" },
+	{ url = "https://github.com/woct0rdho/SageAttention/releases/download/v2.2.0-windows.post3/sageattention-2.2.0+cu128torch2.7.1.post3-cp39-abi3-win_amd64.whl", extra = "torch271_cu128" },
+]
