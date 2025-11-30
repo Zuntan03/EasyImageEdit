@@ -119,7 +119,7 @@ echo "Download necessary files automatically. Are you sure? [y/n] (default: y)"
 set /p DOWNLOAD_MODEL=
 
 if not exist "%EASY_ENV_DIR%\Git" ( mkdir "%EASY_ENV_DIR%\Git" )
-echo %GIT_VERSION%> "%EASY_ENV_DIR%\Git\GitVersion.txt"
+>"%EASY_ENV_DIR%\Git\GitVersion.txt" echo %GIT_VERSION%
 if "%~1"=="DEBUG" ( goto :SKIP_GIT_CLONE )
 pushd "%EASY_ENV_DIR%\Git"
 
@@ -128,22 +128,22 @@ setlocal
 
 if "%EASY_GIT_USE_PORTABLE%" neq "" (  goto :USE_PORTABLE_GIT )
 where /Q git
-if %ERRORLEVEL% equ 0 ( endlocal & goto :GIT_EXISTS )
+if %ERRORLEVEL% equ 0 ( endlocal & goto :GIT_PATH_END )
 cd>NUL 2>&1
 :USE_PORTABLE_GIT
 
 set "CURL_CMD=C:\Windows\System32\curl.exe -fkL"
 
 @REM https://github.com/git-for-windows/git/releases
-if "%GIT_VERSION%" equ "" ( set "GIT_VERSION=2.51.2" )
+if "%GIT_VERSION%" equ "" ( set "GIT_VERSION=2.52.0" )
 
 if "%~1" neq "" (
-	echo %~1> "%CD%\GitVersion.txt"
+	>"%CD%\GitVersion.txt" echo %~1
 )
 if exist "%CD%\GitVersion.txt" (
 	set /p GIT_VERSION=<"%CD%\GitVersion.txt"
 ) else (
-	echo %GIT_VERSION%> "%CD%\GitVersion.txt"
+	>"%CD%\GitVersion.txt" echo %GIT_VERSION%
 )
 if exist "%CD%\%GIT_VERSION%\bin\git.exe" goto :GIT_INSTALLED
 
@@ -191,7 +191,7 @@ start /b "" "%CD%\%GIT_VERSION%\post-install.bat"
 :GIT_INSTALLED
 
 echo "%PATH%" | find /i "%CD%\%GIT_VERSION%\bin" >NUL
-if %ERRORLEVEL% equ 0 ( endlocal & goto :GIT_EXISTS )
+if %ERRORLEVEL% equ 0 ( endlocal & goto :GIT_PATH_END )
 
 cd>NUL 2>&1
 echo set "PATH=%CD%\%GIT_VERSION%\bin;%%PATH%%"
@@ -200,10 +200,10 @@ echo set "PATH=%CD%\%GIT_VERSION%\bin;%%PATH%%"
 	set "PATH=%CD%\%GIT_VERSION%\bin;%PATH%"
 )
 
-:GIT_EXISTS
-popd
-
+:GIT_PATH_END
 @REM ---------- Sync end SetGitPath.bat, Installer.bat ----------
+
+popd
 
 where /Q git
 if %ERRORLEVEL% equ 0 ( goto :GIT_FOUND )
