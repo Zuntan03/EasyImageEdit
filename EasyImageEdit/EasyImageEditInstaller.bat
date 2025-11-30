@@ -238,9 +238,6 @@ echo call "%PROJECT_DIR%\%PROJECT_NAME%\Setup%PROJECT_NAME%.bat"
 call "%PROJECT_DIR%\%PROJECT_NAME%\Setup%PROJECT_NAME%.bat"
 if %ERRORLEVEL% neq 0 ( exit /b 1 )
 
-echo.
-echo call "%EASY_ENV_DIR%\EnableLongPaths.bat"
-call "%EASY_ENV_DIR%\EnableLongPaths.bat"
 goto :DELETE_SELF
 
 :INIT_REPO

@@ -8,6 +8,8 @@ Z-Image-Turbo(ZIT) を簡単に試せる環境です。
 
 ## インストール
 
+NVIDIA グラフィックスドライバを更新してください。
+
 1. インストール先フォルダを `C:/EasyImageEdit/` や `D:/EIE/` などの浅いパスに作成します。
 2. [EasyImageEditInstaller.bat](https://github.com/Zuntan03/EasyImageEdit/raw/main/EasyImageEdit/EasyImageEditInstaller.bat?ver=0) を右クリックして `名前をつけてリンク先を保存...` で、インストール先フォルダに保存します。
 	- 注意）リンクを開いてから `名前をつけて保存` すると、`*.bat` が `*.txt` になり実行できなくなります。
@@ -19,6 +21,7 @@ Z-Image-Turbo(ZIT) を簡単に試せる環境です。
 ## 使い方
 
 1. `ComfyUi.bat` で起動します。
+	- `Press any key to continue . . .` で終了する場合は、NVIDIA グラフィックスドライバの更新で正常に動作する場合があります。
 	- **[ 注意 ][ ComfyUI の罠 ][ 被害者多め ]**  
 	**初回起動時にブラウザキャッシュにある過去のワークフローが開かれ、エラーになる場合があります。**  
 	**エラーを無視してワークフローを閉じてください。**

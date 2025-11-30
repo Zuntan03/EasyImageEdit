@@ -28,4 +28,7 @@ set TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1
 
 echo python main.py %*
 python main.py %*
-if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
+if %ERRORLEVEL% neq 0 (
+	echo "NVIDIA グラフィックスドライバの更新すると、正常に動作する可能性があります。"
+	pause & popd & exit /b 1
+)
