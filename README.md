@@ -4,7 +4,8 @@
 
 実験的なプロジェクトです。今のところ Edit 機能はありません。
 
-Z-Image-Turbo(ZIT) を簡単に試せる環境です。
+Z-Image-Turbo(ZIT) を簡単に試せる環境です。  
+**RAM 16GB, Geforce GTX 1660Ti(VRAM 6GB) 環境で動作してます。**
 
 ## インストール
 
@@ -22,6 +23,7 @@ NVIDIA グラフィックスドライバを更新してください。
 
 1. `ComfyUi.bat` で起動します。
 	- `Press any key to continue . . .` で終了する場合は、NVIDIA グラフィックスドライバの更新で正常に動作する場合があります。
+	- 画像生成中に `Error runnning sage attention` が表示される場合は、`ComfyUi_OldGpu.bat` で起動してください。
 	- **[ 注意 ][ ComfyUI の罠 ][ 被害者多め ]**  
 	**初回起動時にブラウザキャッシュにある過去のワークフローが開かれ、エラーになる場合があります。**  
 	**エラーを無視してワークフローを閉じてください。**
