@@ -277,7 +277,7 @@ exit /b 0
 if exist "%~0" (
 	echo.
 	echo del "%~0"
-	echo "`The batch file cannot be found.` の表示はエラーではありません。"
-	echo "`The batch file cannot be found.` is not an error."
+	echo "`The batch file cannot be found.` の表示はエラーではありません。インストールは完了しています。このウィンドウを閉じて次に進んでください。"
+	echo "`The batch file cannot be found.` is not an error. The installation is complete. Please close this window and proceed."
 	del "%~0"
 )
