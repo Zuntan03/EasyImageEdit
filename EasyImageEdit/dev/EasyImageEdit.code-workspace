@@ -1,0 +1,32 @@
+{
+	"folders": [
+		{
+			"path": "..\\.."
+		}
+	],
+	"settings": {
+		"git.ignoredRepositories": [
+			"./ComfyUI"
+		],
+		"files.exclude": {
+			"**/__pycache__/": true,
+			"**/.pytest_cache/": true
+		},
+		"files.encoding": "utf8bom",
+		"files.eol": "\r\n",
+		"editor.insertSpaces": true,
+		"editor.tabSize": 4,
+		"[bat]": {
+			"files.encoding": "utf8"
+		},
+		"[ini]": {
+			"files.encoding": "utf8"
+		},
+		"[jsonc]": {
+			"editor.formatOnSave": true, // code-workspace 用
+		},
+		"[json]": {
+			"editor.formatOnSave": true,
+		}
+	}
+}

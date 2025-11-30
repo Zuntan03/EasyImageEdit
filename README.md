@@ -9,8 +9,6 @@ Z-Image-Turbo(ZIT) を簡単に試せる環境です。
 
 ## インストール
 
-NVIDIA グラフィックスドライバを更新してください。
-
 1. インストール先フォルダを `C:/EasyImageEdit/` や `D:/EIE/` などの浅いパスに作成します。
 2. [EasyImageEditInstaller.bat](https://github.com/Zuntan03/EasyImageEdit/raw/main/EasyImageEdit/EasyImageEditInstaller.bat?ver=0) を右クリックして `名前をつけてリンク先を保存...` で、インストール先フォルダに保存します。
 	- 注意）リンクを開いてから `名前をつけて保存` すると、`*.bat` が `*.txt` になり実行できなくなります。
@@ -27,18 +25,26 @@ NVIDIA グラフィックスドライバを更新してください。
 	- **[ 注意 ][ ComfyUI の罠 ][ 被害者多め ]**  
 	**初回起動時にブラウザキャッシュにある過去のワークフローが開かれ、エラーになる場合があります。**  
 	**エラーを無視してワークフローを閉じてください。**
-2. 左端バーの `ワークフロー` から、`Easy/ZIT/Slow-ComfyUI_ZIT_Template.json` ワークフローを開いて、`実行する` で画像を生成します。
+2. 左端バーの `ワークフロー` から、`Easy/ZIT/ZIT-Comparison.json` ワークフローを開いて、`実行する` で画像を生成します。
 
 - **`Update.bat` で EasyImageEdit を更新します。**
 - **`Download\ZImageTurboComparison.bat` でデフォルトの `fp8_scaled` に加え、`bf16`, `DF11`, `GGUF` といった比較用の追加モデルをダウンロードします。**
+
+### LoRA を使う
+
+1. `ComfyUI_models/loras` に LoRA を保存します。
+2. `LoRA 選択` ノードの `Add LoRA` で LoRA を追加します。
+3. 追加した LoRA を右クリックして `Show Info` で `Trigger Words` などを確認できます。
+4. ポジティブプロンプトに `Trigger Words` を入力して生成します。
+
+- `DF11` は LoRA が効かない？ようなのでご注意ください。
 
 ## 最近の更新
 
 ### 2025/11/30
 
 - 公開しました。
-- 次は高速化＆比較に対応したワークフローを用意します。
-- `DF11` は LoRA が効かない？ようなのでご注意ください。
+- 次は高速化＆比較に対応したワークフローを用意しま~~す~~した。
 
 ## ライセンス
 
