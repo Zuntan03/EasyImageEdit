@@ -5,7 +5,8 @@
 実験的なプロジェクトです。今のところ Edit 機能はありません。
 
 Z-Image-Turbo(ZIT) を簡単に試せる環境です。  
-**RAM 16GB, Geforce GTX 1660Ti(VRAM 6GB) 環境で動作してます。**
+**Geforce RTX 3060(VRAM 12GB) で `1024x1024, fp8_scaled, res_multitep, 4steps` の生成が `11秒` です。**  
+**RAM 16GB, Geforce GTX 1660Ti(VRAM 6GB) 環境で動作しています。**
 
 ## インストール
 
@@ -26,6 +27,7 @@ Z-Image-Turbo(ZIT) を簡単に試せる環境です。
 	**初回起動時にブラウザキャッシュにある過去のワークフローが開かれ、エラーになる場合があります。**  
 	**エラーを無視してワークフローを閉じてください。**
 2. 左端バーの `ワークフロー` から、`Easy/ZIT/ZIT-Comparison.json` ワークフローを開いて、`実行する` で画像を生成します。
+	- 長いパスの `FileNotFoundError` が発生する場合は、`EasyEnv\EnableLongPaths.bat` を右クリックして `管理者として実行` してから Windows を再起動します。
 
 - **`Update.bat` で EasyImageEdit を更新します。**
 - **`Download\ZImageTurboComparison.bat` でデフォルトの `fp8_scaled` に加え、`bf16`, `DF11`, `GGUF` といった比較用の追加モデルをダウンロードします。**
@@ -45,6 +47,9 @@ Z-Image-Turbo(ZIT) を簡単に試せる環境です。
 
 - 公開しました。
 - 次は高速化＆比較に対応したワークフローを用意しま~~す~~した。
+
+DF11 の無劣化を確認  
+![](https://raw.githubusercontent.com/wiki/Zuntan03/EasyImageEdit/Log/2511/Df11Lossless.webp)
 
 ## ライセンス
 

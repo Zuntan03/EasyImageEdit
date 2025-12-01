@@ -54,7 +54,7 @@ if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 @REM https://github.com/rgthree/rgthree-comfy/commits/main/
 @REM 2025/11/27 42e73c3c48e8268129a6a1ea6d9766913bfc5435
-call :GIT_HUB_PULL rgthree rgthree-comfy main 42e73c3c48e8268129a6a1ea6d9766913bfc5435
+call :GIT_HUB_PULL rgthree rgthree-comfy main 42e73c3c48e8268129a6a1ea6d9766913bfc5435 "DISABLE_UV_ADD"
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 popd rem "%~dp0..\..\ComfyUI\custom_nodes"
