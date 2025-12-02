@@ -4,6 +4,7 @@ version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = [
 	"pip>=25.3,<26",
+	"hf-xet>=1.2.0,<2",
 ]
 
 [project.optional-dependencies]

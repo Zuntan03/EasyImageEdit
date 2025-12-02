@@ -43,6 +43,15 @@ Z-Image-Turbo(ZIT) を簡単に試せる環境です。
 
 ## 最近の更新
 
+### 2025/12/02
+
+- `ZIT-TextToImage` ワークフローを `Easy/ZIT/` に追加しました。
+	- 実験的な機能として『プロンプト強化』『画像からのプロンプト生成』『ZIT によるアップスケール』を追加しています。
+- カスタムノードに [Comfyui-Z-Image-Utilities](https://github.com/Koko-boya/Comfyui-Z-Image-Utilities/) と [ComfyUI-EulerDiscreteScheduler](https://github.com/erosDiffusion/ComfyUI-EulerDiscreteScheduler/) を追加しました。
+	- 手元では `euler`, `simple`, `9step` の精度が高いです。
+
+`Z-Image Prompt Enhancer` まわりでエラーが発生した場合は、`Manager` ボタン横の `Free model and node cache` をしてから再実行してみてください。
+
 ### 2025/11/30
 
 - 公開しました。

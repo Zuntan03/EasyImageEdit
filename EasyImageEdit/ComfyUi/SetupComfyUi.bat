@@ -28,7 +28,8 @@ pushd "%~dp0..\.."
 @REM https://github.com/comfyanonymous/ComfyUI/releases
 @REM https://github.com/comfyanonymous/ComfyUI/commits/master/
 @REM 2025/11/30 0a6746898d6864d65e2fc7504e5e875f8c19c0ba
-call :GIT_HUB_PULL comfyanonymous ComfyUI master 0a6746898d6864d65e2fc7504e5e875f8c19c0ba
+@REM 2025/12/02 a17cf1c3871ad582c85c2bb6fddb63ec9c6df0ce
+call :GIT_HUB_PULL comfyanonymous ComfyUI master a17cf1c3871ad582c85c2bb6fddb63ec9c6df0ce
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 popd rem "%~dp0..\.."
@@ -39,9 +40,15 @@ pushd "%~dp0..\..\ComfyUI\custom_nodes"
 call :GIT_HUB_PULL mingyi456 ComfyUI-DFloat11-Extended master a4538723928a03ace4c18047668c020dd32feb66
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
+@REM https://github.com/erosDiffusion/ComfyUI-EulerDiscreteScheduler/commits/master/
+@REM 2025/12/02 ac7a096d6370fccee07396fd1b9dc59fd647710b
+call :GIT_HUB_PULL erosDiffusion ComfyUI-EulerDiscreteScheduler master ac7a096d6370fccee07396fd1b9dc59fd647710b
+if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
+
 @REM https://github.com/city96/ComfyUI-GGUF/commits/main/
 @REM 2025/11/30 79379af33899e70276fb66075befcd4e05060e81
-call :GIT_HUB_PULL city96 ComfyUI-GGUF main 79379af33899e70276fb66075befcd4e05060e81
+@REM 2025/12/01 01f8845bf30d89fff293c7bd50187bc59d9d53ea
+call :GIT_HUB_PULL city96 ComfyUI-GGUF main 01f8845bf30d89fff293c7bd50187bc59d9d53ea
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 @REM https://github.com/Comfy-Org/ComfyUI-Manager/tags
@@ -52,9 +59,18 @@ if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 call :GIT_HUB_PULL Smirnov75 ComfyUI-mxToolkit main 7f7a0e584f12078a1c589645d866ae96bad0cc35
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
+@REM https://github.com/Koko-boya/Comfyui-Z-Image-Utilities/commits/main/
+@REM 2025/12/01 56184d4be398a45cefa6ab9285782df62ced1fc7
+call :GIT_HUB_PULL Koko-boya Comfyui-Z-Image-Utilities main 56184d4be398a45cefa6ab9285782df62ced1fc7
+if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
+
+echo git -C Comfyui-Z-Image-Utilities apply --3way "%~dp0Patch\Comfyui-Z-Image-Utilities-vl_model.patch"
+git -C Comfyui-Z-Image-Utilities apply --3way "%~dp0Patch\Comfyui-Z-Image-Utilities-vl_model.patch"
+if %ERRORLEVEL% neq 0 ( pause & popd & endlocal & exit /b 1 )
+
 @REM https://github.com/rgthree/rgthree-comfy/commits/main/
 @REM 2025/11/27 42e73c3c48e8268129a6a1ea6d9766913bfc5435
-call :GIT_HUB_PULL rgthree rgthree-comfy main 42e73c3c48e8268129a6a1ea6d9766913bfc5435 "DISABLE_UV_ADD"
+call :GIT_HUB_PULL rgthree rgthree-comfy main 42e73c3c48e8268129a6a1ea6d9766913bfc5435 DISABLE_UV_ADD
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 popd rem "%~dp0..\..\ComfyUI\custom_nodes"

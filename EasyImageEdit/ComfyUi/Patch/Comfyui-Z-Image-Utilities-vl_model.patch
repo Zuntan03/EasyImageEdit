@@ -1,0 +1,25 @@
+ nodes.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/nodes.py b/nodes.py
+index 1f108f9..386978d 100644
+--- a/nodes.py
++++ b/nodes.py
+@@ -896,6 +896,8 @@ class DirectLocalModelClient(BaseLLMClient):
+         """Generate response using loaded model."""
+         self.clear_debug_log()
+         
++        self.load_model(keep_loaded=keep_loaded)
++        
+         # Safety check for vision input on text-only models
+         has_images = False
+         image_inputs = []
+@@ -918,8 +920,6 @@ class DirectLocalModelClient(BaseLLMClient):
+         self._log(f"Direct Local Model - Repo: {self.repo_id}", "INFO")
+         self._log(f"Quantization: {self.quantization.value}, Temperature: {temperature}")
+         
+-        self.load_model(keep_loaded=keep_loaded)
+-        
+         # Handle Seed
+         if "seed" in kwargs:
+             seed = int(kwargs["seed"])
