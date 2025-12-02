@@ -1,11 +1,48 @@
- nodes.py | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ nodes.py | 37 +++++++++++++++++++++++++++++++++----
+ 1 file changed, 33 insertions(+), 4 deletions(-)
 
 diff --git a/nodes.py b/nodes.py
-index 1f108f9..386978d 100644
+index 1f108f9..3a1e8e3 100644
 --- a/nodes.py
 +++ b/nodes.py
-@@ -896,6 +896,8 @@ class DirectLocalModelClient(BaseLLMClient):
+@@ -333,6 +333,7 @@ def clear_gpu_memory() -> None:
+     gc.collect()
+     if HAS_TRANSFORMERS and torch.cuda.is_available():
+         torch.cuda.empty_cache()
++        torch.cuda.synchronize()
+         torch.cuda.ipc_collect()
+         logger.debug("GPU memory cache cleared")
+ 
+@@ -706,6 +707,7 @@ class DirectLocalModelClient(BaseLLMClient):
+     """Client for directly loaded HuggingFace models with caching."""
+     
+     _model_cache: Dict[str, Tuple[Any, Any]] = {}  # (model, tokenizer) cache
++    _active_instances: List["DirectLocalModelClient"] = []
+     
+     def __init__(
+         self,
+@@ -721,7 +723,19 @@ class DirectLocalModelClient(BaseLLMClient):
+         self.tokenizer = None
+         self.processor = None
+         self.is_vl_model = False
+-    
++        DirectLocalModelClient._active_instances.append(self)
++
++    def release_references(self) -> None:
++        if self. model is not None:
++            del self.model
++            self.model = None
++        if self. tokenizer is not None:
++            del self.tokenizer
++            self.tokenizer = None
++        if self.processor is not None:
++            del self.processor
++            self.processor = None
++
+     @staticmethod
+     def get_models_dir() -> Path:
+         """Get directory for storing local models."""
+@@ -896,6 +910,8 @@ class DirectLocalModelClient(BaseLLMClient):
          """Generate response using loaded model."""
          self.clear_debug_log()
          
@@ -14,7 +51,7 @@ index 1f108f9..386978d 100644
          # Safety check for vision input on text-only models
          has_images = False
          image_inputs = []
-@@ -918,8 +920,6 @@ class DirectLocalModelClient(BaseLLMClient):
+@@ -918,8 +934,6 @@ class DirectLocalModelClient(BaseLLMClient):
          self._log(f"Direct Local Model - Repo: {self.repo_id}", "INFO")
          self._log(f"Quantization: {self.quantization.value}, Temperature: {temperature}")
          
@@ -23,3 +60,41 @@ index 1f108f9..386978d 100644
          # Handle Seed
          if "seed" in kwargs:
              seed = int(kwargs["seed"])
+@@ -1053,6 +1067,15 @@ class DirectLocalModelClient(BaseLLMClient):
+     
+     @classmethod
+     def unload_all_models(cls) -> None:
++        for instance in cls._active_instances:
++            instance.release_references()
++
++        for key, (model, tokenizer_or_processor) in list(cls._model_cache.items()):
++            if model is not None:
++                del model
++            if tokenizer_or_processor is not None:
++                del tokenizer_or_processor
++
+         """Unload all cached models."""
+         cls._model_cache.clear()
+         clear_gpu_memory()
+@@ -1939,6 +1962,7 @@ class Z_ImageUnloadModels:
+                 "unload_all": ("BOOLEAN", {"default": True}),
+             },
+             "optional": {
++                "config": ("ZIMAGE_CONFIG",),
+                 "passthrough": ("*",),  # Pass any input through
+             }
+         }
+@@ -1950,7 +1974,12 @@ class Z_ImageUnloadModels:
+     DESCRIPTION = "Unload cached LLM models to free GPU/system memory."
+     OUTPUT_NODE = True
+     
+-    def unload(self, unload_all: bool = True, passthrough=None):
++    def unload(self, unload_all: bool = True, config=None, passthrough=None):
++        if config is not None and "client" in config:
++            client = config["client"]
++            if isinstance(client, DirectLocalModelClient):
++                client.release_references()
++
+         """Unload models from cache."""
+         if unload_all:
+             DirectLocalModelClient.unload_all_models()

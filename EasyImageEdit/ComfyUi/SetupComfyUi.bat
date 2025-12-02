@@ -41,8 +41,8 @@ call :GIT_HUB_PULL mingyi456 ComfyUI-DFloat11-Extended master a4538723928a03ace4
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 @REM https://github.com/erosDiffusion/ComfyUI-EulerDiscreteScheduler/commits/master/
-@REM 2025/12/02 ac7a096d6370fccee07396fd1b9dc59fd647710b
-call :GIT_HUB_PULL erosDiffusion ComfyUI-EulerDiscreteScheduler master ac7a096d6370fccee07396fd1b9dc59fd647710b
+@REM 2025/12/02 9ae7940aee079793c7d26a96c927192e4b57b8ac
+call :GIT_HUB_PULL erosDiffusion ComfyUI-EulerDiscreteScheduler master 9ae7940aee079793c7d26a96c927192e4b57b8ac
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 @REM https://github.com/city96/ComfyUI-GGUF/commits/main/
@@ -51,11 +51,17 @@ if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 call :GIT_HUB_PULL city96 ComfyUI-GGUF main 01f8845bf30d89fff293c7bd50187bc59d9d53ea
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
+@REM https://github.com/kijai/ComfyUI-KJNodes/commits/main/
+@REM 2025/12/01 06a60ac3fec854909f35aba20aa5be39ff59a6e3
+call :GIT_HUB_PULL kijai ComfyUI-KJNodes main 06a60ac3fec854909f35aba20aa5be39ff59a6e3
+if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
+
 @REM https://github.com/Comfy-Org/ComfyUI-Manager/tags
 call :GIT_HUB_PULL Comfy-Org ComfyUI-Manager main 3.37.1
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 @REM https://github.com/Smirnov75/ComfyUI-mxToolkit/commits/main/
+@REM 2025/05/07 7f7a0e584f12078a1c589645d866ae96bad0cc35
 call :GIT_HUB_PULL Smirnov75 ComfyUI-mxToolkit main 7f7a0e584f12078a1c589645d866ae96bad0cc35
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
