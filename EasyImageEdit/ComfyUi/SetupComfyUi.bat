@@ -29,7 +29,8 @@ pushd "%~dp0..\.."
 @REM https://github.com/comfyanonymous/ComfyUI/commits/master/
 @REM 2025/11/30 0a6746898d6864d65e2fc7504e5e875f8c19c0ba
 @REM 2025/12/02 a17cf1c3871ad582c85c2bb6fddb63ec9c6df0ce
-call :GIT_HUB_PULL comfyanonymous ComfyUI master a17cf1c3871ad582c85c2bb6fddb63ec9c6df0ce
+@REM 2025/12/03 519c9411653df99761053c30e101816e0ca3c24b
+call :GIT_HUB_PULL comfyanonymous ComfyUI master 519c9411653df99761053c30e101816e0ca3c24b
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 popd rem "%~dp0..\.."
@@ -37,7 +38,8 @@ pushd "%~dp0..\..\ComfyUI\custom_nodes"
 
 @REM https://github.com/mingyi456/ComfyUI-DFloat11-Extended/commits/master/
 @REM 2025/11/28 a4538723928a03ace4c18047668c020dd32feb66
-call :GIT_HUB_PULL mingyi456 ComfyUI-DFloat11-Extended master a4538723928a03ace4c18047668c020dd32feb66
+@REM 2025/12/03 7616ff54c0a6ce67a686b296b75856d4ed729f48
+call :GIT_HUB_PULL mingyi456 ComfyUI-DFloat11-Extended master 7616ff54c0a6ce67a686b296b75856d4ed729f48
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 @REM https://github.com/erosDiffusion/ComfyUI-EulerDiscreteScheduler/commits/master/
@@ -70,8 +72,9 @@ if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 call :GIT_HUB_PULL Koko-boya Comfyui-Z-Image-Utilities main 56184d4be398a45cefa6ab9285782df62ced1fc7
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
-echo git -C Comfyui-Z-Image-Utilities apply --3way "%~dp0Patch\Comfyui-Z-Image-Utilities-vl_model.patch"
-git -C Comfyui-Z-Image-Utilities apply --3way "%~dp0Patch\Comfyui-Z-Image-Utilities-vl_model.patch"
+@REM -c core.autocrlf=true apply
+echo git -C Comfyui-Z-Image-Utilities apply --ignore-whitespace --3way "%~dp0Patch\Comfyui-Z-Image-Utilities-vl_model.patch"
+git -C Comfyui-Z-Image-Utilities apply --ignore-whitespace --3way "%~dp0Patch\Comfyui-Z-Image-Utilities-vl_model.patch"
 if %ERRORLEVEL% neq 0 ( pause & popd & endlocal & exit /b 1 )
 
 @REM https://github.com/rgthree/rgthree-comfy/commits/main/

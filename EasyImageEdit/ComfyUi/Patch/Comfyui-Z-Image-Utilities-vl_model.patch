@@ -2,7 +2,7 @@
  1 file changed, 33 insertions(+), 4 deletions(-)
 
 diff --git a/nodes.py b/nodes.py
-index 1f108f9..3a1e8e3 100644
+index 1f108f9..1386ae4 100644
 --- a/nodes.py
 +++ b/nodes.py
 @@ -333,6 +333,7 @@ def clear_gpu_memory() -> None:

@@ -47,6 +47,8 @@ Z-Image-Turbo(ZIT) を簡単に試せる環境です。
 ### 2025/12/03
 
 - `ZIT-TextToImage` ワークフローでの `TypeError: VAEDecodeTiled.decode() missing 1 required positional argument: 'samples'` エラー修正。
+- 特定の環境でパッチの適用に失敗する問題への対処。
+	- `error: patch failed: nodes.py:333`
 
 ### 2025/12/02
 
