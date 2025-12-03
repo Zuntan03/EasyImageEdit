@@ -47,7 +47,7 @@ index 1f108f9..3a1e8e3 100644
          self.clear_debug_log()
          
 +        self.load_model(keep_loaded=keep_loaded)
-+        
++
          # Safety check for vision input on text-only models
          has_images = False
          image_inputs = []

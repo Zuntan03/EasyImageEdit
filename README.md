@@ -43,6 +43,11 @@ Z-Image-Turbo(ZIT) を簡単に試せる環境です。
 
 ## 最近の更新
 
+
+### 2025/12/03
+
+- `ZIT-TextToImage` ワークフローでの `TypeError: VAEDecodeTiled.decode() missing 1 required positional argument: 'samples'` エラー修正。
+
 ### 2025/12/02
 
 - `ZIT-TextToImage` ワークフローを `Easy/ZIT/` に追加しました。
