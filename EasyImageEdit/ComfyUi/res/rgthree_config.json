@@ -1,0 +1,10 @@
+{
+  "features": {
+    "comfy_top_bar_menu": {
+      "enabled": false
+    },
+    "progress_bar": {
+      "enabled": false
+    }
+  }
+}

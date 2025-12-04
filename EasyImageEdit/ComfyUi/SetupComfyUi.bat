@@ -30,7 +30,8 @@ pushd "%~dp0..\.."
 @REM 2025/11/30 0a6746898d6864d65e2fc7504e5e875f8c19c0ba
 @REM 2025/12/02 a17cf1c3871ad582c85c2bb6fddb63ec9c6df0ce
 @REM 2025/12/03 519c9411653df99761053c30e101816e0ca3c24b
-call :GIT_HUB_PULL comfyanonymous ComfyUI master 519c9411653df99761053c30e101816e0ca3c24b
+@REM 2025/12/04 6be85c7920224b45bbc6417e00147815e78c12a9
+call :GIT_HUB_PULL comfyanonymous ComfyUI master 6be85c7920224b45bbc6417e00147815e78c12a9
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 popd rem "%~dp0..\.."
@@ -55,7 +56,8 @@ if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 @REM https://github.com/kijai/ComfyUI-KJNodes/commits/main/
 @REM 2025/12/01 06a60ac3fec854909f35aba20aa5be39ff59a6e3
-call :GIT_HUB_PULL kijai ComfyUI-KJNodes main 06a60ac3fec854909f35aba20aa5be39ff59a6e3
+@REM 2025/12/04 62a862db37d77a9a2e7611f638f9ff151a24fdec
+call :GIT_HUB_PULL kijai ComfyUI-KJNodes main 62a862db37d77a9a2e7611f638f9ff151a24fdec
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
 @REM https://github.com/Comfy-Org/ComfyUI-Manager/tags
@@ -82,6 +84,12 @@ if %ERRORLEVEL% neq 0 ( pause & popd & endlocal & exit /b 1 )
 call :GIT_HUB_PULL rgthree rgthree-comfy main 42e73c3c48e8268129a6a1ea6d9766913bfc5435 DISABLE_UV_ADD
 if %ERRORLEVEL% neq 0 ( popd & endlocal & exit /b 1 )
 
+if exist "rgthree-comfy\rgthree_config.json" ( goto :SKIP_RGTHREE_CONFIG_PATCH )
+echo copy /Y "%~dp0res\rgthree_config.json" "rgthree-comfy\rgthree_config.json"
+copy /Y "%~dp0res\rgthree_config.json" "rgthree-comfy\rgthree_config.json"
+if %ERRORLEVEL% neq 0 ( pause & popd & endlocal & exit /b 1 )
+:SKIP_RGTHREE_CONFIG_PATCH
+
 popd rem "%~dp0..\..\ComfyUI\custom_nodes"
 pushd "%~dp0..\..\ComfyUI"
 
@@ -93,6 +101,10 @@ call %JUNCTION% ..\ComfyUI_output output
 if not exist user\default\workflows\ ( mkdir user\default\workflows )
 call %JUNCTION% ..\ComfyUI_workflows user\default\workflows
 call %JUNCTION% user\default\workflows\Easy %~dp0Workflow
+
+@REM ComfyUI設定ファイル更新
+"%~dp0.venv\Scripts\python" "%~dp0src\update_config.py" "user\default\comfy.settings.json"
+if %ERRORLEVEL% neq 0 ( pause & popd & endlocal & exit /b 1 )
 
 popd rem "%~dp0..\..\ComfyUI"
 endlocal
